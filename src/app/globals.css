@@ -2,26 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+/* Firefox */
+.blue_scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color:;
+  
+}
+
+/* Chrome, Edge, and Safari */
+.blue_scrollbar::-webkit-scrollbar {
+  width: 10px;
+  border-radius: 10px;
+  
+}
+
+.blue_scrollbar::-webkit-scrollbar-track {
+  background:#7b7f89 ;
+  border-radius: 5px;
+}
+
+.blue_scrollbar::-webkit-scrollbar-thumb {
+  background-color:rgb(99,102,241);
+  border-radius: 14px;
+  border:;
 }
