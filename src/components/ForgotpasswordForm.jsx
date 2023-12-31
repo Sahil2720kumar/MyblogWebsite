@@ -1,10 +1,15 @@
 "use client";
-import react, { useState } from "react";
 import Link from "next/link";
+import react, { useState, useEffect } from "react";
+import { useMutation } from "@apollo/client";
+import { FORGOT_PASSWORD } from "@/utils/mutations";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 export default function ForgotpasswordForm() {
-    const [loading, setLoading] = useState(false);
-    const [errors, setErrors] = useState({});
+    const [forgotPassword, { data, loading, error }] =
+        useMutation(FORGOT_PASSWORD);
+
     const [authData, setAuthData] = useState({
         email: ""
     });
@@ -20,8 +25,30 @@ export default function ForgotpasswordForm() {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        setLoading(true);
-        console.log(authData);
+        try {
+            console.log("try click");
+            const { data } = await forgotPassword({
+                variables: {
+                    data: authData
+                }
+            });
+            console.log("data", data);
+            // Check if the mutation was successful
+            if (data && data.message) {
+                toast.success(data?.message?.message, {
+                    position: "top-center"
+                });
+            } else {
+                toast.error("Error Occured sending Email.", {
+                    position: "top-center"
+                });
+            }
+        } catch (e) {
+            console.log("error", e);
+            toast.error("Error Occured sending Email.", {
+                position: "top-center"
+            });
+        }
     };
     return (
         <form method="POST">
@@ -42,6 +69,15 @@ export default function ForgotpasswordForm() {
                         placeholder="Email Here... "
                         className="block w-full px-5 py-2.5 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-indigo-400 dark:focus:border-indigo-400 focus:ring-indigo-400 focus:outline-none focus:ring focus:ring-opacity-40"
                     />
+                    <span className="text-[14px] text-red-600 font-bold">
+                        {
+                            error?.networkError?.result.errors[0]?.extensions
+                                ?.errors?.email
+                        }
+                    </span>
+                    <span className="text-[14px] block text-red-600 font-bold">
+                        {error?.networkError?.result.errors[0]?.message}
+                    </span>
                 </div>
                 <button
                     type="submit"

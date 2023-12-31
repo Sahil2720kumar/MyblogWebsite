@@ -4,10 +4,15 @@ import { ThemeContext } from "@/context/ThemeContext";
 import ToggleThemeButton from "./ToggleThemeButton";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
+import { useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
 export default function Navbar() {
     const router = useRouter();
+    const { data: session, status } = useSession();
     const [mobileMenu, setMobileMenu] = useState(false);
+    const [profileShow, setProfileShow] = useState(false);
     const [searchButton, setSearchButton] = useState(false);
     const { theme, setTheme } = useContext(ThemeContext);
     const [searchValue, setSearchValue] = useState("");
@@ -27,13 +32,83 @@ export default function Navbar() {
                 <div className=" border-b dark:border-b-gray-800 w-screen flex items-center justify-between p-2 md:px-8">
                     {/* Logo starting from here */}
                     <div className="dark:text-white font-bold text-indigo-600 text-2xl md:text-3xl">
-                        <Link href="/"> DailyLearn </Link>
+                        <Link href="/"><span className="font-bold" >DailyLearn</span></Link>
                     </div>
                     {/* Logo ending here */}
 
                     {/* Change theme from  here */}
                     <ToggleThemeButton />
                     {/* Ending  Change theme */}
+
+                    {/* profile from  here */}
+                    <button
+                        type="button"
+                        className={`${
+                            status === "authenticated" ? "block" : "hidden"
+                        } flex text-sm bg-indigo-800 rounded-full md:me-0 focus:ring-4 focus:ring-indigo-300 dark:focus:ring-indigo-600`}
+                        id="user-menu-button"
+                        onClick={() => setProfileShow(!profileShow)}
+                    >
+                        <span className="sr-only">Open user menu</span>
+                        <Image
+                            className=" rounded-full bg-indigo-700"
+                            src={`${
+                                session?.user?.avatar
+                                    ? session.user.avatar
+                                    : session?.user.role === "User"
+                                    ? "/userProfile.png"
+                                    : "/author.png"
+                            }
+                            `}
+                            width={39}
+                            height={39}
+                            alt="Picture of the user"
+                        />
+                    </button>
+                    {/* user dropdown menu */}
+                    <div
+                        className={`${
+                            profileShow ? "block" : "hidden"
+                        } items-center  justify-between absolute right-10 md:right-1/3 lg:right-[60%]  top-1/2 z-50 text-base list-none bg-stone-50 divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`}
+                    >
+                        <div className="px-4 py-3  ">
+                            <span className="block text-sm text-gray-900 dark:text-white">
+                                {session?.user?.name}
+                            </span>
+                            <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
+                                {session?.user?.email}
+                            </span>
+                        </div>
+                        <ul className="py-2">
+                            <li>
+                                <Link
+                                    href="/dashboard/"
+                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                                >
+                                    Dashboard
+                                </Link>
+                            </li>
+
+                            <li>
+                                <Link
+                                    href="#"
+                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                                    onClick={() =>
+                                        signOut({
+                                            callbackUrl:
+                                                session?.user?.role === "Author"
+                                                    ? "/author/signin"
+                                                    : "/signin",
+                                            redirect: true
+                                        })
+                                    }
+                                >
+                                    Sign out
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
+                    {/* Ending  profile */}
 
                     {/* Desktop menu */}
                     <div className="hidden lg:block">
@@ -99,7 +174,7 @@ export default function Navbar() {
                                     href="/signup/"
                                     onClick={() => setMobileMenu(!mobileMenu)}
                                     className=" bg-indigo-500  text-white p-2 text-gray-900 rounded  md:hover:bg-indigo-600 md:hover:text-white hover:outline dark:text-white hover:text-white dark:hover:text-white dark:border-gray-700 transition-colors duration-300 transform  rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-50"
-                                   >
+                                >
                                     Sign up
                                 </Link>
                             </li>
@@ -117,7 +192,6 @@ export default function Navbar() {
                             type="button"
                             className="sm:block lg:hidden border border-black relative inline-flex items-center justify-center rounded-md p-2 text-gray-400  focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                             aria-controls="mobile-menu"
-                            aria-expanded="false"
                         >
                             <span className="absolute -inset-0.5"></span>
                             <span className="sr-only">Open main menu</span>
@@ -209,24 +283,30 @@ export default function Navbar() {
                                 </Link>
                             </li>
                             <hr />
-                            <li>
-                                <Link
-                                    href="/signin/"
-                                    onClick={() => setMobileMenu(!mobileMenu)}
-                                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100  dark:text-white  dark:hover:bg-gray-700 dark:hover:text-white  dark:border-gray-700"
-                                >
-                                    Sign in
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    href="/signup/"
-                                    onClick={() => setMobileMenu(!mobileMenu)}
-                                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100  dark:text-white  dark:hover:bg-gray-700 dark:hover:text-white  dark:border-gray-700"
-                               >
-                                    Sign up
-                                </Link>
-                            </li>
+                            <div className="">
+                                <li>
+                                    <Link
+                                        href="/signin/"
+                                        onClick={() =>
+                                            setMobileMenu(!mobileMenu)
+                                        }
+                                        className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100  dark:text-white  dark:hover:bg-gray-700 dark:hover:text-white  dark:border-gray-700"
+                                    >
+                                        Sign in
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        href="/signup/"
+                                        onClick={() =>
+                                            setMobileMenu(!mobileMenu)
+                                        }
+                                        className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100  dark:text-white  dark:hover:bg-gray-700 dark:hover:text-white  dark:border-gray-700"
+                                    >
+                                        Sign up
+                                    </Link>
+                                </li>
+                            </div>
                         </ul>
                     </div>
                 </div>

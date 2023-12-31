@@ -1,6 +1,7 @@
 "use client";
 import react, { useState } from "react";
 import Link from "next/link";
+import { toast } from "react-toastify";
 
 export default function MagicLoginForm() {
     const [loading, setLoading] = useState(false);
@@ -22,6 +23,10 @@ export default function MagicLoginForm() {
         e.preventDefault();
         setLoading(true);
         console.log(authData);
+        toast.warning("this feature is not available NOW."),
+            {
+                position: "top-center"
+            };
     };
     return (
         <form method="POST">

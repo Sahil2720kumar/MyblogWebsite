@@ -1,22 +1,37 @@
 "use client";
-import react, { useState } from "react";
+import react, { useState,useEffect } from "react";
 import Link from "next/link";
+import { useMutation } from "@apollo/client";
+import { SIGNIN_USER } from "@/utils/mutations";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 
 export default function LoginForm() {
-    const [isPasswordVisible,setIsPasswordVisible]= useState(false)
-    const [loading, setLoading] = useState(false);
+    const router = useRouter();
+    const params = useSearchParams();
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [isGoogleLoading, setIsGoogleLoading] = useState(false);
     const [isGithubLoading, setIsGithubLoading] = useState(false);
-    const [errors, setErrors] = useState({});
     const [authData, setAuthData] = useState({
         email: "",
         password: ""
     });
+    const [logInUser, { data, loading, error }] = useMutation(SIGNIN_USER);
     
-    const togglePasswordVisibility=()=>{
-      setIsPasswordVisible(!isPasswordVisible)
-    }
+    useEffect(()=>{
+      toast.warning(params?.get("message"), {
+            position: "top-center"
+        });
+    },[])
+        
     
+
+    const togglePasswordVisibility = () => {
+        setIsPasswordVisible(!isPasswordVisible);
+    };
+
     const inputEvent = event => {
         const { name, value } = event.target;
         setAuthData(preValue => {
@@ -29,20 +44,57 @@ export default function LoginForm() {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        setLoading(true);
-        console.log(authData);
+        try {
+            const { data } = await logInUser({
+                variables: {
+                    data: authData
+                }
+            });
+
+            // Check if the mutation was successful
+            if (data && data.user) {
+                toast.success("Login successful!", {
+                    position: "top-center"
+                });
+                await signIn("credentials", {
+                    email: authData.email,
+                    password: authData.password,
+                    callbackUrl: "/",
+                    redirect: true
+                });
+                router.push("/");
+              
+            } else {
+                toast.error("Invalid credentials. Please try again.", {
+                    position: "top-center"
+                });
+            }
+        } catch (e) {
+            console.error("Error during login:");
+            toast.error("An error occurred during login.", {
+                position: "top-center"
+            });
+        }
     };
     const githubSignIn = async e => {
         e.preventDefault();
         setIsGithubLoading(true);
         console.log("github login");
-        //setIsGithubLoading(false)
+        await signIn("github", {
+            callbackUrl: "/",
+            redirect: true
+        });
+        setIsGithubLoading(false);
     };
 
     const googleSignIn = async e => {
         e.preventDefault();
         setIsGoogleLoading(true);
         console.log("google login");
+        await signIn("google", {
+            callbackUrl: "/",
+            redirect: true
+        });
         //setIsGithubLoading(false)
     };
 
@@ -65,6 +117,15 @@ export default function LoginForm() {
                         placeholder="Email Here... "
                         className="block w-full px-5 py-2.5 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-indigo-400 dark:focus:border-indigo-400 focus:ring-indigo-400 focus:outline-none focus:ring focus:ring-opacity-40"
                     />
+                    <span className="text-[14px] text-red-600 font-bold">
+                        {
+                            error?.networkError?.result.errors[0]?.extensions
+                                ?.errors?.email
+                        }
+                    </span>
+                    <span className="text-[14px] block text-red-600 font-bold">
+                        {error?.networkError?.result.errors[0]?.message}
+                    </span>
                 </div>
 
                 <div className="relative flex-1 px-2 mt-4 md:mt-0">
@@ -85,11 +146,17 @@ export default function LoginForm() {
                         onChange={inputEvent}
                         name="password"
                         id="password"
-                        type={`${isPasswordVisible?"text":"password"}`}
+                        type={`${isPasswordVisible ? "text" : "password"}`}
                         value={authData.password}
                         placeholder="••••••••"
                         className=" block w-full px-5 py-2.5 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-indigo-400 dark:focus:border-indigo-400 focus:ring-indigo-400 focus:outline-none focus:ring focus:ring-opacity-40"
                     />
+                    <span className="text-[14px] text-red-600 font-bold">
+                        {
+                            error?.networkError?.result.errors[0]?.extensions
+                                ?.errors?.password
+                        }
+                    </span>
                     <button
                         className="absolute outline-none  top-11 right-5 flex items-center text-gray-600"
                         onClick={togglePasswordVisibility}
@@ -157,7 +224,9 @@ export default function LoginForm() {
                     <button
                         onClick={githubSignIn}
                         disabled={isGithubLoading ? true : false}
-                        className="dark:text-stone-100 flex items-center justify-center px-4 py-2 space-x-2 transition-colors duration-300 border border-indigo-500 rounded-md group  hover:bg-indigo-500 focus:outline-none md:text-[16px] "
+                        className={`${
+                            isGithubLoading ? "bg-indigo-600 " : ""
+                        }dark:text-stone-100 flex items-center justify-center px-4 py-2 space-x-2 transition-colors duration-300 border border-indigo-500 rounded-md group  hover:bg-indigo-500 focus:outline-none md:text-[16px] `}
                     >
                         <span>
                             <svg

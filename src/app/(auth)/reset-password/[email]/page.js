@@ -1,7 +1,7 @@
 import ResetpasswordForm from "@/components/ResetpasswordForm";
 import Link from "next/link";
 
-export default function ResetPasswordForm() {
+export default function ResetPasswordForm({params,searchParams}) {
     return (
         <section className="bg-white dark:bg-gray-900">
             <div className="flex flex-col items-center justify-center container px-6 py-12 mx-auto">
@@ -18,7 +18,7 @@ export default function ResetPasswordForm() {
                             Go back to login
                         </Link>
                     </p>
-                    <ResetpasswordForm />
+                    <ResetpasswordForm params={params} searchParams={searchParams} />
                 </div>
             </div>
         </section>

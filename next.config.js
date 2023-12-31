@@ -1,8 +1,23 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-        ignoreDuringBuilds: true,
-  },
-}
+    eslint: {
+        ignoreDuringBuilds: true
+    },
+    images: {
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "**"
+            }
+        ]
+    },
+    experimental: {
+        serverComponentsExternalPackages: [
+            "@react-email/components",
+            "@react-email/render",
+            "@react-email/tailwind"
+        ]
+    }
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
