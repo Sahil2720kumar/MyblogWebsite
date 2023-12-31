@@ -70,6 +70,7 @@ export default function LoginForm() {
                 });
             }
         } catch (e) {
+          console.log(e)
             console.error("Error during login:");
             toast.error("An error occurred during login.", {
                 position: "top-center"
