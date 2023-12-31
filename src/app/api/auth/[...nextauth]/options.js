@@ -25,7 +25,6 @@ export const authOptions = {
                 if (findAuthor) {
                     if (findAuthor) {
                         user = findAuthor;
-
                         return true;
                     } else {
                         return "/dashboard/signin?message=login failed";

@@ -1,5 +1,5 @@
 "use client";
-import react, { useState,useEffect } from "react";
+import react, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useMutation } from "@apollo/client";
 import { SIGNIN_USER } from "@/utils/mutations";
@@ -19,16 +19,14 @@ export default function LoginForm() {
         password: ""
     });
     const [logInUser, { data, loading, error }] = useMutation(SIGNIN_USER);
-    
-    useEffect(()=>{
-      toast.warning(params?.get("message"), {
+
+    useEffect(() => {
+        toast.warning(params?.get("message"), {
             position: "top-center"
         });
-    },[])
-        
-    
+    }, []);
 
-    const togglePasswordVisibility = () => {
+    const togglePasswordVisibility = ()=> {
         setIsPasswordVisible(!isPasswordVisible);
     };
 
@@ -63,14 +61,13 @@ export default function LoginForm() {
                     redirect: true
                 });
                 router.push("/");
-              
             } else {
                 toast.error("Invalid credentials. Please try again.", {
                     position: "top-center"
                 });
             }
         } catch (e) {
-          console.log(e)
+            console.log(e);
             console.error("Error during login:");
             toast.error("An error occurred during login.", {
                 position: "top-center"
@@ -158,9 +155,9 @@ export default function LoginForm() {
                                 ?.errors?.password
                         }
                     </span>
-                    <button
+                    <span
                         className="absolute outline-none  top-11 right-5 flex items-center text-gray-600"
-                        onClick={togglePasswordVisibility}
+                        onClick={() => togglePasswordVisibility()}
                     >
                         {isPasswordVisible ? (
                             <svg
@@ -198,7 +195,7 @@ export default function LoginForm() {
                                 />
                             </svg>
                         )}
-                    </button>
+                    </span>
                 </div>
             </div>
 
