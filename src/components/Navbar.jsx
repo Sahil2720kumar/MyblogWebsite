@@ -52,7 +52,7 @@ export default function Navbar() {
                         onClick={() => setProfileShow(!profileShow)}
                     >
                         <span className="sr-only">Open user menu</span>
-                        <Image
+                        <img
                             className=" rounded-full bg-indigo-700"
                             src={`${
                                 session?.user?.avatar
