@@ -66,8 +66,8 @@ export default async function ProfilePage() {
                                     session?.user?.avatar
                                     ? session.user.avatar
                                     : session?.user.role === "User"
-                                    ? "/userProfile.png"
-                                    : "/author.png"
+                                    ? "/userProfile.svg"
+                                    : "/author.svg"
                                 }`}
                                 width={44}
                                 height={44}

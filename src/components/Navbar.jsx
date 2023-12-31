@@ -32,7 +32,9 @@ export default function Navbar() {
                 <div className=" border-b dark:border-b-gray-800 w-screen flex items-center justify-between p-2 md:px-8">
                     {/* Logo starting from here */}
                     <div className="dark:text-white font-bold text-indigo-600 text-2xl md:text-3xl">
-                        <Link href="/"><span className="font-bold" >DailyLearn</span></Link>
+                        <Link href="/">
+                            <span className="font-bold">DailyLearn</span>
+                        </Link>
                     </div>
                     {/* Logo ending here */}
 
@@ -54,10 +56,10 @@ export default function Navbar() {
                             className=" rounded-full bg-indigo-700"
                             src={`${
                                 session?.user?.avatar
-                                    ? session.user.avatar
-                                    : session?.user.role === "User"
-                                    ? "/userProfile.png"
-                                    : "/author.png"
+                                    ? session.user?.avatar
+                                    : session?.user?.role === "User"
+                                    ? "/userProfile.svg"
+                                    : "/author.svg"
                             }
                             `}
                             width={39}
