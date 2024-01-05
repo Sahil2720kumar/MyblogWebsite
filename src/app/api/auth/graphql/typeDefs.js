@@ -29,6 +29,14 @@ const typeDefs = gql`
     type ResetPasswordMessage {
       message:String!
     }
+    
+    type ContactSaveMessage {
+      message:String!
+    }
+    
+    type hireSaveMessage {
+      message:String!
+    }
 
     input RegisterUserInput {
         name: String!
@@ -64,6 +72,24 @@ const typeDefs = gql`
         password:String!
         password_confirmation: String!
     }
+    
+    
+    
+    input ContactSaveInput {
+      fname:String!
+      lname:String
+      email:String!
+      message:String!
+    }
+    
+    input hireSaveInput {
+      fullname:String!
+      phnumber:String!
+      email:String!
+      website:String!
+      skills:[String]!
+    }
+    
 
     type Query {
         getUsers: [User]!
@@ -78,6 +104,8 @@ const typeDefs = gql`
         logInAuthor(input: LogInAuthorInput): User
         forgotPassword(input:ForgotPasswordInput):ForgotPasswordMessage
         resetPassword(input:ResetPasswordInput):ResetPasswordMessage
+        contactSave(input:ContactSaveInput):ContactSaveMessage
+        hireSave(input:hireSaveInput):hireSaveMessage
     }
 `;
 

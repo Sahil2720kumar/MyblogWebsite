@@ -53,3 +53,19 @@ export const RESET_PASSWORD = gql`
         }
     }
 `;
+
+export const CONTACT_SAVE = gql`
+    mutation ContactSaveMutation($data: ContactSaveInput!) {
+        message: contactSave(input: $data) {
+            message
+        }
+    }
+`;
+
+export const HIRE_SAVE = gql`
+    mutation HireSaveMutation($data: hireSaveInput!) {
+        message: hireSave(input: $data) {
+            message
+        }
+    }
+`;

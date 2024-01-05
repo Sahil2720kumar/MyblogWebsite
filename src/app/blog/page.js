@@ -1,7 +1,7 @@
 import react from "react"
 import CardContainer from "@/components/CardContainer"
 
-export default function Course(){
+export default function Blog(){
   return (
     <div className="bg-gray-50 dark:text-white dark:bg-gray-800">
       <div  className="py-5">

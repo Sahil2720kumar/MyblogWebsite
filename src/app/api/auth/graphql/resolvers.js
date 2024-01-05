@@ -2,6 +2,7 @@ import { connectToDB } from "@/utils/database";
 import { User } from "@/models/user";
 import { Author } from "@/models/author";
 import userMutation from "./userMutation";
+import contactMutation from "./contactMutation"
 
 import {
     ErrorTypes,
@@ -43,7 +44,7 @@ const resolvers = {
     },
     Mutation: {
         ...userMutation,
-        
+        ...contactMutation
     }
 };
 
