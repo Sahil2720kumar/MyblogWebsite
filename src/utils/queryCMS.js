@@ -192,3 +192,12 @@ export const GET_ALL_CHAPTERS_SLUG = gql`
         }
     }
 `;
+
+export const GET_ALL_POSTS_SLUG = gql`
+    query GetAllPostsSlug {
+        posts {
+            slug
+            title
+        }
+    }
+`;

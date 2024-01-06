@@ -1,6 +1,18 @@
 import Image from "next/image";
-import { getParticularPost } from "@/services/cmsServices";
+import { getParticularPost, getAllPostsSlug } from "@/services/cmsServices";
 import moment from "moment";
+
+
+
+export const revalidate = 120; // revalidate the data at most every 10 min
+
+export async function generateStaticParams() {
+    const allPosts = await getAllPostsSlug();
+    //console.log(allPosts);
+    return allPosts.map(post => ({
+        slug: post.slug
+    }));
+}
 
 export default async function ParticularBlog({ params, searchParams }) {
     const { slug } = params;

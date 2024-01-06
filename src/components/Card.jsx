@@ -53,8 +53,8 @@ export default function Card({ cardContent, buttonContent, blog }) {
                     <Link
                         href={
                             blog
-                                ? `/blog/${cardContent.slug}`
-                                : `/course/${cardContent.slug}`
+                                ? `/blog/${cardContent.slug}/`
+                                : `/course/${cardContent.slug}/`
                         }
                     >
                         {" "}
