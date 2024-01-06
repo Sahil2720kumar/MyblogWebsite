@@ -2,11 +2,33 @@ import react from "react";
 import CardContainer from "@/components/CardContainer";
 import Accordion from "@/components/Accordion";
 import CourseTabs from "@/components/CourseTabs";
-import { getCourseByChapterName } from "@/services/cmsServices";
+import {
+    getCourseByChapterName,
+    getAllChaptersSlug
+} from "@/services/cmsServices";
 import Image from "next/image";
 
 
-export default async function CourseName({ params, searchParams }) {
+
+export const revalidate = 60 // revalidate the data at most every hour
+ 
+
+export async function generateStaticParams() {
+    const allSlugsQueryData = await getAllChaptersSlug();
+   // console.log("allSlugsQueryData", allSlugsQueryData);
+    const allSlugs = allSlugsQueryData.flatMap(course =>
+        course.chapters.map(chapter => {
+            //console.log(chapter.slug);
+            return chapter.slug;
+        })
+    );
+    //console.log(allSlugs);
+    return allSlugs.map(slug => ({
+        slug:slug
+    }));
+}
+
+export default async function CourseChapter({ params, searchParams }) {
     const { slug } = params;
     const data = await getCourseByChapterName(slug);
     const chapters = data.chapters;
@@ -14,6 +36,8 @@ export default async function CourseName({ params, searchParams }) {
         return element.slug === slug;
     });
     const chapterdata = { ...chapter[0] };
+
+
     //console.log("chapterdata",chapterdata)
     return (
         <div className="dark:text-white dark:bg-gray-800">

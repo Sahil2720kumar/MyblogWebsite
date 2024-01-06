@@ -117,6 +117,7 @@ export const GET_PARTICULAR_COURSE_CHAPTERS = gql`
     query GetParticularCourseChapters($slug: String!) {
         courseList(where: { slug: $slug }) {
             id
+            title
             banner {
                 url
             }
@@ -173,6 +174,21 @@ export const GET_FEATURED_COURSE = gql`
             slug
             totalChapters
             id
+        }
+    }
+`;
+
+export const GET_ALL_CHAPTERS_SLUG = gql`
+    query GetAllChaptersSlug {
+        courseLists {
+            title
+            slug
+            chapters {
+                ... on Chapter {
+                    slug
+                    title
+                }
+            }
         }
     }
 `;
