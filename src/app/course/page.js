@@ -3,6 +3,13 @@ import CardContainer from "@/components/CardContainer";
 import Card from "@/components/Card";
 import { getAllCourses } from "@/services/cmsServices";
 
+
+export const metadata = {
+    title: "Courses",
+    description:"Embark on a journey of knowledge with DailyLearn's curated list of courses. Explore diverse subjects, expertly crafted content, and enrich your learning experience. Unlock new skills and possibilities on our comprehensive course page."
+};
+
+
 export default async function Course() {
     const blog = false;
     const courses = await getAllCourses();

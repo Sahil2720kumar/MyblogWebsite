@@ -1,6 +1,13 @@
 import SignupForm from "@/components/SignupForm";
 import Link from "next/link";
 
+export const metadata = {
+    title: "Sign Up",
+    description:
+        "Explore a world of knowledge with DailyLearn – your go-to destination for insightful articles, tutorials, and resources. Elevate your learning journey today!"
+};
+
+
 export default function SignIn() {
     return (
         <section className="bg-white dark:bg-gray-900">

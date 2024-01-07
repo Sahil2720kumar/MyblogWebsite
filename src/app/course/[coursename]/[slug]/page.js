@@ -9,6 +9,30 @@ import {
 } from "@/services/cmsServices";
 import Image from "next/image";
 
+export async function generateMetadata({ params }) {
+    const { slug } = params;
+    const data = await getCourseByChapterName(slug);
+    if (data) {
+        const chapters = data.chapters;
+        const chapter = chapters.filter(element => {
+            return element.slug === slug;
+        });
+        const chapterdata = { ...chapter[0] };
+        return {
+            title: chapterdata.title,
+            describtion: chapterdata.excerpt,
+            openGraph: {
+                images: [{ url: chapterdata.image.url }]
+            }
+        };
+    }
+    return {
+        title: "Not found",
+        describtion:
+            "Oops! It seems you've reached an unexpected destination on DailyLearn. Our apologies for the detour. Navigate back to discover a world of knowledge or explore our homepage for a fresh start."
+    };
+}
+
 export const revalidate = 120; // revalidate the data at most every 10 min
 
 export async function generateStaticParams() {
@@ -31,7 +55,7 @@ export default async function CourseChapter({ params, searchParams }) {
     const data = await getCourseByChapterName(slug);
     if (!data) {
         console.log("not found");
-        notFound()
+        notFound();
     }
 
     const chapters = data.chapters;

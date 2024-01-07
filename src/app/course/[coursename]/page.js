@@ -6,6 +6,20 @@ import Link from "next/link";
 import { GetParticularCourseChapters } from "@/services/cmsServices";
 import Image from "next/image";
 
+// or Dynamic metadata
+export async function generateMetadata({ params }) {
+    const { coursename } = params;
+    const data = await GetParticularCourseChapters(coursename);
+
+    return {
+        title:data.title,
+        describtion:data.describtion,
+        openGraph: {
+            images: [{ url: data.banner.url }]
+        }
+    };
+}
+
 export default async function CourseName({ params, searchParams }) {
     const { coursename } = params;
     const data = await GetParticularCourseChapters(coursename);

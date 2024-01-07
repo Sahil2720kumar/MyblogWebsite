@@ -1,8 +1,27 @@
 import Image from "next/image";
 import { getParticularPost, getAllPostsSlug } from "@/services/cmsServices";
 import moment from "moment";
+import { notFound } from "next/navigation";
 
-
+// or Dynamic metadata
+export async function generateMetadata({ params }) {
+    const { slug } = params;
+    const data = (await getParticularPost(slug))[0]?.node;
+    if(!data){
+      return {
+        title: "Not found",
+        describtion:
+            "Oops! It seems you've reached an unexpected destination on DailyLearn. Our apologies for the detour. Navigate back to discover a world of knowledge or explore our homepage for a fresh start."
+    };
+    }
+    return {
+        title: data.title,
+        description: data.excerpt,
+        openGraph: {
+            images: [{ url: data.featuredImage.url }]
+        }
+    };
+}
 
 export const revalidate = 120; // revalidate the data at most every 10 min
 
@@ -16,12 +35,16 @@ export async function generateStaticParams() {
 
 export default async function ParticularBlog({ params, searchParams }) {
     const { slug } = params;
-    const data = (await getParticularPost(slug))[0].node;
+    const data = (await getParticularPost(slug))[0]?.node;
+    if (!data) {
+        console.log("not found");
+        notFound();
+    }
     //console.log("ParticularBlog", data);
     return (
         <div className=" p-5  bg-gray-50 dark:text-white dark:bg-gray-800">
             <div className=" py-4 px-6 rounded-md shadow-md bg-white dark:bg-gray-700">
-                <h1 className="text-center text-gray-800 text-2xl font-bold my-3 ">
+                <h1 className="dark:text-stone-100 text-center text-gray-800 text-2xl font-bold my-3 ">
                     {data.title}
                 </h1>
                 <div className="flex items-center justify-center">

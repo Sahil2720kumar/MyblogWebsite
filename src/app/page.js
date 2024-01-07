@@ -28,10 +28,10 @@ export default async function Home() {
                 </p>
                 <div className="pt-5 dark:text-white my-5 flex items-center justify-center space-x-1.5">
                     <button className="font-semibold text-base bg-black text-white rounded px-3 py-2">
-                        <Link href="/course/" >Free Courses</Link>
+                        <Link href="/course/">Free Courses</Link>
                     </button>
                     <button className="font-semibold text-base bg-gray-400 text-black rounded px-3 py-2">
-                        <Link href="/blog/" >Explore Blogs</Link>
+                        <Link href="/blog/">Explore Blogs</Link>
                     </button>
                 </div>
             </div>

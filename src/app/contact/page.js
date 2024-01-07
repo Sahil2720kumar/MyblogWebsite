@@ -1,5 +1,12 @@
 import Form from "@/components/Form"
 
+export const metadata = {
+    title: "Contact",
+    description:
+        "Explore a world of knowledge with DailyLearn – your go-to destination for insightful articles, tutorials, and resources. Elevate your learning journey today!"
+};
+
+
 export default function Contact() {
     return (
         <section className="bg-white dark:bg-gray-900">

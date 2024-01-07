@@ -118,6 +118,7 @@ export const GET_PARTICULAR_COURSE_CHAPTERS = gql`
         courseList(where: { slug: $slug }) {
             id
             title
+            describtion
             banner {
                 url
             }
@@ -148,7 +149,7 @@ export const GET_COURSE_BY_CHAPTER_NAME = gql`
                             id
                             slug
                             title
-                            serialNo
+                            excerpt
                             content {
                                 html
                             }
@@ -183,10 +184,12 @@ export const GET_ALL_CHAPTERS_SLUG = gql`
         courseLists {
             title
             slug
+            updatedAt
             chapters {
                 ... on Chapter {
                     slug
                     title
+                    
                 }
             }
         }
@@ -198,6 +201,7 @@ export const GET_ALL_POSTS_SLUG = gql`
         posts {
             slug
             title
+            updatedAt
         }
     }
 `;

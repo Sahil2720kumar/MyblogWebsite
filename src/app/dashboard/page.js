@@ -5,7 +5,6 @@ import Link from "next/link";
 
 export default async function ProfilePage() {
     const session = await getServerSession(authOptions);
-    
     const convertTime = timestamp => {
         const date = new Date(timestamp);
         // Extract day, month, and year
