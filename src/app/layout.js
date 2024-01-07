@@ -8,13 +8,17 @@ import "react-toastify/dist/ReactToastify.css";
 import NextAuthProvider from "@/context/NextAuthProvider";
 
 export const metadata = {
-    title:{
-      default:"DailyLearn",
-      template:"%s - DailyLearn"
+    title: {
+        default: "DailyLearn",
+        template: "%s - DailyLearn"
     },
-    description: "Explore a world of knowledge with DailyLearn – your go-to destination for insightful articles, tutorials, and resources. Elevate your learning journey today!",
-    twitter:{
-      card:"summary_large_image"
+    description:
+        "Explore a world of knowledge with DailyLearn – your go-to destination for insightful articles, tutorials, and resources. Elevate your learning journey today!",
+    twitter: {
+        card: "summary_large_image"
+    },
+    openGraph: {
+        images: [{ url: `${process.env.NEXT_PUBLIC_BASE_URL}/opengraph-image.png`}]
     }
 };
 
