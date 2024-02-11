@@ -6,7 +6,7 @@ export const metadata = {
 
 export default function About(){
   return(
-    <div className="p-3 min-h-screen bg-gray-50 dark:bg-gray-800 dark:text-white w-screen flex items-center  flex-col">
+    <div className="p-3 min-h-screen bg-gray-50 dark:bg-gray-800 dark:text-white w-screen flex items-center  flex-col ">
       <h2 className="text-indigo-500 text-4xl font-bold mb-4">Welcome to DailyLearn</h2>
       <p className="text-gray-700 dark:text-stone-100 mb-8">
         At DailyLearn, we believe in the transformative power of continuous learning. Our platform is crafted with love using React for seamless interactivity and Tailwind CSS for a visually stunning user interface.

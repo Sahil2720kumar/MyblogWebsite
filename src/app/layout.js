@@ -18,7 +18,9 @@ export const metadata = {
         card: "summary_large_image"
     },
     openGraph: {
-        images: [{ url: `${process.env.NEXT_PUBLIC_BASE_URL}/opengraph-image.png`}]
+        images: [
+            { url: `${process.env.NEXT_PUBLIC_BASE_URL}/opengraph-image.png` }
+        ]
     }
 };
 
@@ -26,13 +28,16 @@ export default function RootLayout({ children }) {
     return (
         <ApolloWrapper>
             <ThemeContextProvider>
-                <html lang="en" className="">
+                <html lang='en' className=''>
                     <body>
                         <ToastContainer />
                         <NextAuthProvider>
-                            <Navbar />
-                            {children}
-                            <Footer />
+                            
+                                <Navbar />
+                                <main className="">
+                                {children}
+                                <Footer />
+                                </main>
                         </NextAuthProvider>
                     </body>
                 </html>

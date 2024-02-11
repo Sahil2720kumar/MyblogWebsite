@@ -66,15 +66,15 @@ export default async function CourseChapter({ params, searchParams }) {
 
     //console.log("chapterdata",chapterdata)
     return (
-        <div className="dark:text-white dark:bg-gray-800">
+        <div className="dark:text-white dark:bg-gray-800 max-w-screen-lg mx-auto">
             <div className="p-3 ">
-                <div className="flex items-center justify-center min-h-[200px]">
+                <div className="flex items-center justify-center overflow-hidden max-h-[200px] md:max-h-[400px]">
                     <Image
                         src={chapterdata.image.url}
                         width={0}
                         height={0}
                         sizes="100vw"
-                        className="inline px-0.5 w-full h-[100%] overflow-hidden"
+                        className="inline px-0.5 w-full overflow-hidden  h-full object-contain"
                         alt="Picture of the chapter"
                     />
                 </div>

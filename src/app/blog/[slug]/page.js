@@ -42,7 +42,7 @@ export default async function ParticularBlog({ params, searchParams }) {
     }
     //console.log("ParticularBlog", data);
     return (
-        <div className=" p-5  bg-gray-50 dark:text-white dark:bg-gray-800">
+        <div className=" p-5  bg-gray-50 dark:text-white dark:bg-gray-800 max-w-screen-lg mx-auto">
             <div className=" py-4 px-6 rounded-md shadow-md bg-white dark:bg-gray-700">
                 <h1 className="dark:text-stone-100 text-center text-gray-800 text-2xl font-bold my-3 ">
                     {data.title}

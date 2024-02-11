@@ -11,9 +11,9 @@ export default async function Home() {
     const featuredCourses = await getFeaturedCourse();
     //console.log(posts)
     return (
-        <div className="bg-gray-50 dark:bg-gray-800 dark:text-white w-screen flex items-center justify-center flex-col">
+        <div className="bg-gray-50 dark:bg-gray-800 dark:text-white w-screen flex items-center justify-center flex-col ">
             {/* Hero section starts here   */}
-            <div className="w-screen text-center my-14 mx-10 px-10 space-y-3">
+            <div className=" text-center my-14 md:mx-10 px-10 space-y-3">
                 <h1 className=" font-bold text-3xl md:text-[40px]">
                     Welcome to{" "}
                     <span className="text-indigo-500">DailyLearn</span> <br />
