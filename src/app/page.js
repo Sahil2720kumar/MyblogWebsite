@@ -5,6 +5,9 @@ import { authOptions } from "./api/auth/[...nextauth]/options";
 import { getFeaturedCourse } from "@/services/cmsServices";
 import Link from "next/link";
 
+export const revalidate = 120; // revalidate the data at most every 10 min
+
+
 export default async function Home() {
     const blog = false;
     const session = await getServerSession(authOptions);
