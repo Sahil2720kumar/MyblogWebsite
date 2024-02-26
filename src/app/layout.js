@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NextAuthProvider from "@/context/NextAuthProvider";
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const metadata = {
     title: {
@@ -40,6 +41,7 @@ export default function RootLayout({ children }) {
                                 <Footer />
                                 </main>
                                 <Analytics/>
+                                <SpeedInsights />
                         </NextAuthProvider>
                     </body>
                 </html>
