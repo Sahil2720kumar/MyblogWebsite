@@ -6,6 +6,7 @@ import { ApolloWrapper } from "@/context/apollo-wrapper";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NextAuthProvider from "@/context/NextAuthProvider";
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata = {
     title: {
@@ -38,6 +39,7 @@ export default function RootLayout({ children }) {
                                 {children}
                                 <Footer />
                                 </main>
+                                <Analytics/>
                         </NextAuthProvider>
                     </body>
                 </html>
