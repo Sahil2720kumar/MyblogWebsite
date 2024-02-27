@@ -4,7 +4,7 @@ import react,{useState,createContext,useEffect} from "react"
 export const ThemeContext=createContext()
 const getThemeLocalStorage=()=>{
   if(typeof window!=="undefined"){
-    const htmlClasses=document.querySelector("html").classList
+    const htmlClasses=document?.querySelector("html").classList
     if(localStorage.theme==="dark"){
       htmlClasses.add("dark")
     }
