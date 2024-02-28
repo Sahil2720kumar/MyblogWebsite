@@ -23,7 +23,8 @@ export const metadata = {
         images: [
             { url: `${process.env.NEXT_PUBLIC_BASE_URL}/opengraph-image.png` }
         ]
-    }
+    },
+    verification: { google: 'F7Fw7pPWJ1O_nyt6i4SobSc-iDScH99Hz0nhW2aRceY', },
 };
 
 export default function RootLayout({ children }) {

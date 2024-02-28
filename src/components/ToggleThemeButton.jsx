@@ -7,7 +7,7 @@ export default function ToggleThemeButton() {
   const {theme,setTheme}=useContext(ThemeContext)
   // console.log(localStorage.getItem("theme"))
   const toggleTheme=()=>{
-    const htmlClasses=document.querySelector("html").classList
+    const htmlClasses=document?.querySelector("html").classList
     if(localStorage.theme==="dark"){
       localStorage.setItem("theme","light")
       htmlClasses.remove("dark")
