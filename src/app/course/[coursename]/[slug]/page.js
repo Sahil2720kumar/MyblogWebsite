@@ -20,15 +20,17 @@ export async function generateMetadata({ params }) {
         const chapterdata = { ...chapter[0] };
         return {
             title: chapterdata.title,
-            describtion: chapterdata.excerpt,
+            description: chapterdata.excerpt,
             openGraph: {
-                images: [{ url: chapterdata.image.url }]
+                images: [{ url: chapterdata.image.url }],
+                title:chapterdata.title,
+                description:chapterdata.excerpt
             }
         };
     }
     return {
         title: "Not found",
-        describtion:
+        description:
             "Oops! It seems you've reached an unexpected destination on DailyLearn. Our apologies for the detour. Navigate back to discover a world of knowledge or explore our homepage for a fresh start."
     };
 }

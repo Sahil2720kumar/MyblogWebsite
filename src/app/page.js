@@ -20,7 +20,7 @@ export default async function Home() {
                 <h1 className=" font-bold text-3xl md:text-[40px]">
                     Welcome to{" "}
                     <span className="text-indigo-500">DailyLearn</span> <br />
-                    Learn Marketing |
+                    Learn Courses |
                 </h1>
                 {/*JSON.stringify(session)*/}
                 <p className="text-center text-gray-500 md:text-xl">

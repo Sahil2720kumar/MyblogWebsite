@@ -6,8 +6,8 @@ import { ApolloWrapper } from "@/context/apollo-wrapper";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NextAuthProvider from "@/context/NextAuthProvider";
-import { Analytics } from "@vercel/analytics/react"
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata = {
     title: {
@@ -22,10 +22,25 @@ export const metadata = {
     openGraph: {
         images: [
             { url: `${process.env.NEXT_PUBLIC_BASE_URL}/opengraph-image.png` }
-        ]
+        ],
+        title: "DailyLearn",
+        url:process.env.NEXT_PUBLIC_BASE_URL,
+        description:"Explore a world of knowledge with DailyLearn – your go-to destination for insightful articles, tutorials, and resources. Elevate your learning journey today!",
+        siteName: "DailyLearn",
+        locale: "en_US",
+        type: "website",
+        publishedTime: new Date()
     },
-    verification: { google: 'F7Fw7pPWJ1O_nyt6i4SobSc-iDScH99Hz0nhW2aRceY', },
+    verification: { google: "F7Fw7pPWJ1O_nyt6i4SobSc-iDScH99Hz0nhW2aRceY" }
 };
+
+// const structuredData = {
+//     "@context": "https://schema.org",
+//     "@type": "WebSite",
+//     name: "My Students Helpline",
+//     alternateName: ["Students Helpline", "Education Blog", "MSH"],
+//     url: "https://mystudentshelpline.com/"
+// };
 
 export default function RootLayout({ children }) {
     return (
@@ -35,14 +50,13 @@ export default function RootLayout({ children }) {
                     <body>
                         <ToastContainer />
                         <NextAuthProvider>
-                            
-                                <Navbar />
-                                <main className="">
+                            <Navbar />
+                            <main className=''>
                                 {children}
                                 <Footer />
-                                </main>
-                                <Analytics/>
-                                <SpeedInsights />
+                            </main>
+                            <Analytics />
+                            <SpeedInsights />
                         </NextAuthProvider>
                     </body>
                 </html>
