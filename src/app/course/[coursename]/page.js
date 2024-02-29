@@ -10,15 +10,18 @@ import Image from "next/image";
 export async function generateMetadata({ params }) {
     const { coursename } = params;
     const data = await GetParticularCourseChapters(coursename);
-  console.log(data)
+    console.log(data);
     return {
         title: data.title,
-        description:`${data.describtion}`,
+        description: `${data.describtion}`,
 
         openGraph: {
             images: [{ url: data.banner.url }],
             title: data.title,
-            description:`${data.describtion}`,
+            description: `${data.describtion}`,
+            siteName: "DailyLearn",
+            locale: "en_US",
+            type: "website"
         }
     };
 }
@@ -26,9 +29,9 @@ export async function generateMetadata({ params }) {
 export default async function CourseName({ params, searchParams }) {
     const { coursename } = params;
     const data = await GetParticularCourseChapters(coursename);
-    console.log("describtion" ,data.describtion)
+    console.log("describtion", data.describtion);
     const chapters = data.chapters;
-   // console.log(chapters);
+    // console.log(chapters);
     return (
         <div className='min-h-screen  dark:text-white dark:bg-gray-800 max-w-screen-lg mx-auto'>
             <div className='p-3 '>

@@ -23,8 +23,11 @@ export async function generateMetadata({ params }) {
             description: chapterdata.excerpt,
             openGraph: {
                 images: [{ url: chapterdata.image.url }],
-                title:chapterdata.title,
-                description:chapterdata.excerpt
+                title: chapterdata.title,
+                description: chapterdata.excerpt,
+                siteName: "DailyLearn",
+                locale: "en_US",
+                type: "website"
             }
         };
     }
@@ -68,19 +71,19 @@ export default async function CourseChapter({ params, searchParams }) {
 
     //console.log("chapterdata",chapterdata)
     return (
-        <div className="dark:text-white dark:bg-gray-800 max-w-screen-lg mx-auto">
-            <div className="p-3 ">
-                <div className="flex items-center justify-center overflow-hidden max-h-[200px] md:max-h-[400px]">
+        <div className='dark:text-white dark:bg-gray-800 max-w-screen-lg mx-auto'>
+            <div className='p-3 '>
+                <div className='flex items-center justify-center overflow-hidden max-h-[200px] md:max-h-[400px]'>
                     <Image
                         src={chapterdata.image.url}
                         width={0}
                         height={0}
-                        sizes="100vw"
-                        className="inline px-0.5 w-full overflow-hidden  h-full object-contain"
-                        alt="Picture of the chapter"
+                        sizes='100vw'
+                        className='inline px-0.5 w-full overflow-hidden  h-full object-contain'
+                        alt='Picture of the chapter'
                     />
                 </div>
-                <div className="">
+                <div className=''>
                     {/* accordion-collapse  */}
                     <Accordion chapters={chapters} />
                     {/* End accordion-collapse  */}

@@ -20,7 +20,10 @@ export async function generateMetadata({ params }) {
         openGraph: {
             images: [{ url: data.featuredImage.url }],
             title: data.title,
-            description: data.excerpt
+            description: data.excerpt,
+            siteName: "DailyLearn",
+            locale: "en_US",
+            type: "website"
         }
     };
 }
