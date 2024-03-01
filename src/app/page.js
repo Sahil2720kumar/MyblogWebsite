@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Card from "@/components/Card";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/options";
