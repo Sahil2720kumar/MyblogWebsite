@@ -38,8 +38,8 @@ export const metadata = {
 };
 
 const jsonLd = {
-    "@context": "https:schema.org",
-    "@type": "WebSite",
+    "@context": "https://schema.org",
+    "@type": "website",
     name: "DailyLearn",
     alternateName: ["DailyLearn", "Daily learn", "Dibrugarh university"],
     url: process.env.NEXT_PUBLIC_BASE_URL
