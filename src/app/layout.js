@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import NextAuthProvider from "@/context/NextAuthProvider";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import Script from "next/script"; 
 
 export const metadata = {
     title: {
@@ -19,13 +20,15 @@ export const metadata = {
     twitter: {
         card: "summary_large_image"
     },
+    siteName: "DailyLearn",
     openGraph: {
         images: [
             { url: `${process.env.NEXT_PUBLIC_BASE_URL}/opengraph-image.png` }
         ],
         title: "DailyLearn",
-        url:process.env.NEXT_PUBLIC_BASE_URL,
-        description:"Explore a world of knowledge with DailyLearn – your go-to destination for insightful articles, tutorials, and resources. Elevate your learning journey today!",
+        url: process.env.NEXT_PUBLIC_BASE_URL,
+        description:
+            "Explore a world of knowledge with DailyLearn – your go-to destination for insightful articles, tutorials, and resources. Elevate your learning journey today!",
         siteName: "DailyLearn",
         locale: "en_US",
         type: "website",
@@ -34,19 +37,26 @@ export const metadata = {
     verification: { google: "F7Fw7pPWJ1O_nyt6i4SobSc-iDScH99Hz0nhW2aRceY" }
 };
 
-// const structuredData = {
-//     "@context": "https://schema.org",
-//     "@type": "WebSite",
-//     name: "My Students Helpline",
-//     alternateName: ["Students Helpline", "Education Blog", "MSH"],
-//     url: "https://mystudentshelpline.com/"
-// };
+const structuredData = {
+    "@context": "https:schema.org",
+    "@type": "WebSite",
+    name: "DailyLearn",
+    alternateName: ["DailyLearn", "Daily learn", "Dibrugarh university"],
+    url: process.env.NEXT_PUBLIC_BASE_URL
+};
 
 export default function RootLayout({ children }) {
     return (
         <ApolloWrapper>
             <ThemeContextProvider>
                 <html lang='en' className=''>
+                    <Script
+                        id='faq-schema'
+                        type='application/ld+json'
+                        dangerouslySetInnerHTML={{
+                            __html: JSON.stringify(structuredData)
+                        }}
+                    />
                     <body>
                         <ToastContainer />
                         <NextAuthProvider>
@@ -55,6 +65,7 @@ export default function RootLayout({ children }) {
                                 {children}
                                 <Footer />
                             </main>
+
                             <Analytics />
                             <SpeedInsights />
                         </NextAuthProvider>
