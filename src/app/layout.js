@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import NextAuthProvider from "@/context/NextAuthProvider";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import Script from "next/script"; 
+import Script from "next/script";
 
 export const metadata = {
     title: {
@@ -37,7 +37,7 @@ export const metadata = {
     verification: { google: "F7Fw7pPWJ1O_nyt6i4SobSc-iDScH99Hz0nhW2aRceY" }
 };
 
-const structuredData = {
+const jsonLd = {
     "@context": "https:schema.org",
     "@type": "WebSite",
     name: "DailyLearn",
@@ -50,18 +50,22 @@ export default function RootLayout({ children }) {
         <ApolloWrapper>
             <ThemeContextProvider>
                 <html lang='en' className=''>
-                    <Script
-                        id='faq-schema'
-                        type='application/ld+json'
-                        dangerouslySetInnerHTML={{
-                            __html: JSON.stringify(structuredData)
-                        }}
-                    />
                     <body>
                         <ToastContainer />
                         <NextAuthProvider>
                             <Navbar />
                             <main className=''>
+                                {/* Move the script tag here */}
+                                <section>
+                                    {/* Add JSON-LD to your page */}
+                                    <script
+                                        type='application/ld+json'
+                                        dangerouslySetInnerHTML={{
+                                            __html: JSON.stringify(jsonLd)
+                                        }}
+                                    />
+                                    {/* ... */}
+                                </section>
                                 {children}
                                 <Footer />
                             </main>
