@@ -55,21 +55,16 @@ export default function RootLayout({ children }) {
                         <NextAuthProvider>
                             <Navbar />
                             <main className=''>
-                                {/* Move the script tag here */}
-                                <section>
-                                    {/* Add JSON-LD to your page */}
-                                    <script
-                                        type='application/ld+json'
-                                        dangerouslySetInnerHTML={{
-                                            __html: JSON.stringify(jsonLd)
-                                        }}
-                                    />
-                                    {/* ... */}
-                                </section>
                                 {children}
                                 <Footer />
                             </main>
-
+                            <Script
+                                type='application/ld+json'
+                                id="HOME_SEO"
+                                dangerouslySetInnerHTML={{
+                                    __html: JSON.stringify(jsonLd)
+                                }}
+                            />
                             <Analytics />
                             <SpeedInsights />
                         </NextAuthProvider>
