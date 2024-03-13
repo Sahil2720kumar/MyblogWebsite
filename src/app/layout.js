@@ -21,6 +21,21 @@ export const metadata = {
         card: "summary_large_image"
     },
     siteName: "DailyLearn",
+    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL),
+    keywords: [
+        "Daily learning",
+        "Learning resources",
+        "Educational content",
+        "Online learning",
+        "Knowledge hub",
+        "Study materials",
+        "Learning platform",
+        "Educational articles",
+        "Daily lessons",
+        "DailyLearn",
+        "daily learn"
+    ],
+    authors: [{ name: "sahil", url: process.env.NEXT_PUBLIC_BASE_URL }],
     openGraph: {
         images: [
             { url: `${process.env.NEXT_PUBLIC_BASE_URL}/opengraph-image.png` }
@@ -60,7 +75,7 @@ export default function RootLayout({ children }) {
                             </main>
                             <Script
                                 type='application/ld+json'
-                                id="HOME_SEO"
+                                id='HOME_SEO'
                                 dangerouslySetInnerHTML={{
                                     __html: JSON.stringify(jsonLd)
                                 }}
