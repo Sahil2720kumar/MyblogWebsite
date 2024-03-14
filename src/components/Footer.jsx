@@ -10,15 +10,15 @@ export default function Footer() {
                         <Link href='#' className='flex items-center'>
                             <span className='self-center text-3xl font-semibold whitespace-nowrap dark:text-white text-indigo-600'>
                                 {" "}
-                                DailyLearn
+                                <h2>DailyLearn</h2>
                             </span>
                         </Link>
                     </div>
                     <div className='grid space-y-1.5 grid-cols-2  sm:gap-6 sm:grid-cols-3'>
                         <div>
-                            <h2 className='mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white'>
+                            <p className='mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white'>
                                 Resources
-                            </h2>
+                            </p>
                             <ul className='text-gray-500 dark:text-gray-400 font-medium'>
                                 <li className='mb-4'>
                                     <Link
@@ -36,9 +36,9 @@ export default function Footer() {
                             </ul>
                         </div>
                         <div>
-                            <h2 className='mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white'>
+                            <p className='mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white'>
                                 Follow us
-                            </h2>
+                            </p>
                             <ul className='text-gray-500 dark:text-gray-400 font-medium'>
                                 <li className='mb-4'>
                                     <Link href='#' className='hover:underline '>
@@ -53,9 +53,9 @@ export default function Footer() {
                             </ul>
                         </div>
                         <div>
-                            <h2 className='mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white'>
+                            <p className='mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white'>
                                 Legal
-                            </h2>
+                            </p>
                             <ul className='text-gray-500 dark:text-gray-400 font-medium'>
                                 <li className='mb-4'>
                                     <Link

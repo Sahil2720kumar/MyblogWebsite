@@ -45,15 +45,15 @@ export default async function ParticularBlog({ params, searchParams }) {
         console.log("not found");
         notFound();
     }
-    //console.log("ParticularBlog", data);
+    console.log("ParticularBlog", data);
     return (
-        <div className=' p-5  bg-gray-50 dark:text-white dark:bg-gray-800 max-w-screen-lg mx-auto'>
+        <div className='min-h-screen p-5  bg-gray-50 dark:text-white dark:bg-gray-800 max-w-screen-lg mx-auto'>
             <div className=' py-4 px-6 rounded-md shadow-md bg-white dark:bg-gray-700'>
-                <h1 className='dark:text-stone-100 text-center text-gray-800 text-2xl font-bold my-3 '>
+                <h1 className='dark:text-stone-100 text-center text-gray-800 text-2xl md:text-4xl font-bold my-3 '>
                     {data.title}
                 </h1>
                 <div className='flex items-center justify-center'>
-                    <span>
+                    <span className="md:text-2xl">
                         <span className='mr-2  rounded-full'>
                             <Image
                                 src={data.author.photo.url}
@@ -63,16 +63,28 @@ export default async function ParticularBlog({ params, searchParams }) {
                                 alt='Picture of the author'
                             ></Image>
                         </span>
-                        {data.author.name}
+                       <h2 className="inline" >{data.author.name}</h2>
                     </span>
-                    <span className='text-[15px] px-3 dark:text-gray-300 text-gray-600'>
+                    <span className='text-[15px] md:text-2xl px-3 dark:text-gray-300 text-gray-600'>
                         {moment(data.createdAt).format("LL")}
                     </span>
                 </div>
                 {/* start blog content */}
                 <div
-                    className='mt-4 text-gray-900 dark:text-stone-100'
+                    className={`${
+                        data.postPdfUrl ? "block" : "none hidden"
+                    } mt-2 aspect-w-16 h-[500px] `}
+                >
+                    <iframe
+                        src={`${data.postPdfUrl ? data.postPdfUrl : ""}`}
+                        className='w-full h-full'
+                        allowfullscreen
+                    ></iframe>
+                </div>
+
+                <div
                     dangerouslySetInnerHTML={{ __html: data.content.html }}
+                    className='mt-4 md:m-4 md:pt-10 text-gray-900 dark:text-stone-100 md:text-2xl'
                 >
                     {/* blog content */}
                 </div>

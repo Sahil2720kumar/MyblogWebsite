@@ -71,7 +71,7 @@ export default function RootLayout({ children }) {
                             <Navbar />
                             <main className=''>
                                 {children}
-                                <Footer />
+                               <Footer/>
                             </main>
                             <Script
                                 type='application/ld+json'

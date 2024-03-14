@@ -33,7 +33,7 @@ export default function Navbar() {
                     {/* Logo starting from here */}
                     <div className='dark:text-white font-bold text-indigo-600 text-2xl md:text-3xl'>
                         <Link href='/'>
-                            <span className='font-bold'>DailyLearn</span>
+                            <span className='font-bold'><h2>DailyLearn</h2></span>
                         </Link>
                     </div>
                     {/* Logo ending here */}

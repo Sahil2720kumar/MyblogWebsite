@@ -42,12 +42,12 @@ export default async function CourseName({ params, searchParams }) {
                         height={0}
                         sizes='100vw'
                         className='inline px-0.5 w-full overflow-hidden  h-full object-contain'
-                        alt='Picture of the course'
+                        alt={`${coursename} image`}
                     />
                 </div>
                 <div className=' '>
                     <h1 className='dark:text-white mt-5 md:text-5xl font-semibold  text-indigo-600 text-2xl'>
-                        Chapters List
+                        {coursename} Chapters List
                     </h1>
                     <div>
                         <ul className=' pl-2 pt-2 space-y-2'>
@@ -60,7 +60,7 @@ export default async function CourseName({ params, searchParams }) {
                                         href={`${coursename}/${chapter.slug}/`}
                                     >
                                         {" "}
-                                        {chapter.title}
+                                        <h2 className="md:text-2xl" >{chapter.title}</h2>
                                     </Link>
                                 </li>
                             ))}

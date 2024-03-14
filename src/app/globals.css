@@ -37,3 +37,60 @@
   border-radius: 14px;
   border:;
 }
+
+/* Custom Table Styles */
+
+/* Light Mode */
+@media (prefers-color-scheme: light) {
+  /* Table */
+  table {
+    @apply w-full border-collapse;
+  }
+
+  /* Table Header */
+  table th {
+    @apply text-left py-2 px-4 border-b border-gray-300;
+  }
+
+  /* Table Body */
+  table td {
+    @apply py-2 px-4 border-b border-gray-300;
+  }
+
+  /* Hover Effect */
+  table tbody tr:hover {
+    @apply bg-gray-100;
+  }
+
+  /* Striped Rows */
+  table tbody tr:nth-child(even) {
+    @apply bg-gray-200;
+  }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  /* Table */
+  table {
+    @apply  border-collapse overflow-scroll border-b w-[500px] md:w-[800px] rounded ;
+  }
+
+  /* Table Header */
+  table th {
+    @apply text-left py-2 px-4 border-b border-gray-700 bg-gray-200;
+  }
+
+  /* Table Body */
+  table td {
+    @apply py-2 px-4 border-b border-gray-700 ;
+  }
+
+  /* Hover Effect */
+  table tbody tr:hover {
+    @apply bg-gray-100;
+  }
+
+  /* Striped Rows */
+  
+}
+

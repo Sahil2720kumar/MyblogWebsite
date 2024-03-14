@@ -37,7 +37,7 @@ export default function CardContainer({ blog }) {
     };
     useEffect(() => {
         if (totalPosts <= skip) {
-            console.log(totalPosts, skip);
+            //console.log(totalPosts, skip);
             return;
         }
          getBlogs();
@@ -50,7 +50,7 @@ export default function CardContainer({ blog }) {
     }, []);
 
     return (
-        <div className="md:flex md:items-center md:flex-col md:justify-center">
+        <div className="min-h-screen md:flex md:items-center md:flex-col ">
             <div
                 id="cards_container"
                 className=" my-4 flex items-center justify-center md:flex-row  md:flex-wrap flex-col space-y-5 p-3 px-6 space-y-2 md:space-y-0 md:gap-8"

@@ -72,6 +72,7 @@ export const GET_PARTICULAR_POST = gql`
                     featuredImage {
                         url
                     }
+                    postPdfUrl
                     content {
                         html
                     }
@@ -189,7 +190,6 @@ export const GET_ALL_CHAPTERS_SLUG = gql`
                 ... on Chapter {
                     slug
                     title
-                    
                 }
             }
         }
