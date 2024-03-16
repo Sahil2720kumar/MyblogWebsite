@@ -2,95 +2,90 @@
 @tailwind components;
 @tailwind utilities;
 
-
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
 }
 
 /* For IE, Edge and Firefox */
 .scrollbar-hide {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
 
 /* Firefox */
 .blue_scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color:;
-  
+    scrollbar-width: thin;
+    scrollbar-color:;
 }
 
 /* Chrome, Edge, and Safari */
 .blue_scrollbar::-webkit-scrollbar {
-  width: 10px;
-  border-radius: 10px;
-  
+    width: 10px;
+    border-radius: 10px;
 }
 
 .blue_scrollbar::-webkit-scrollbar-track {
-  background:#7b7f89 ;
-  border-radius: 5px;
+    background: #7b7f89;
+    border-radius: 5px;
 }
 
 .blue_scrollbar::-webkit-scrollbar-thumb {
-  background-color:rgb(99,102,241);
-  border-radius: 14px;
-  border:;
+    background-color: rgb(99, 102, 241);
+    border-radius: 14px;
+    border:;
 }
 
 /* Custom Table Styles */
 
 /* Light Mode */
 @media (prefers-color-scheme: light) {
-  /* Table */
-  table {
-    @apply w-full border-collapse;
-  }
+    /* Table */
+    table {
+        @apply w-full border-collapse;
+    }
 
-  /* Table Header */
-  table th {
-    @apply text-left py-2 px-4 border-b border-gray-300;
-  }
+    /* Table Header */
+    table th {
+        @apply text-left py-2 px-4 border-b border-gray-300 bg-gray-100;
+    }
 
-  /* Table Body */
-  table td {
-    @apply py-2 px-4 border-b border-gray-300;
-  }
+    /* Table Body */
+    table td {
+        @apply py-2 px-4 border-b border-gray-300;
+    }
 
-  /* Hover Effect */
-  table tbody tr:hover {
-    @apply bg-gray-100;
-  }
+    /* Hover Effect */
+    table tbody tr:hover {
+        @apply bg-gray-100;
+    }
 
-  /* Striped Rows */
-  table tbody tr:nth-child(even) {
-    @apply bg-gray-200;
-  }
+    /* Striped Rows */
+    table tbody tr:nth-child(even) {
+        @apply bg-gray-200;
+    }
 }
 
 /* Dark Mode */
 @media (prefers-color-scheme: dark) {
-  /* Table */
-  table {
-    @apply  border-collapse overflow-scroll border-b w-[500px] md:w-[800px] rounded ;
-  }
+    /* Table */
+    table {
+        @apply border-collapse overflow-scroll border-b w-[500px] md:w-[800px] rounded my-2 border-gray-700 dark:border-gray-900;
+    }
 
-  /* Table Header */
-  table th {
-    @apply text-left py-2 px-4 border-b border-gray-700 bg-gray-200;
-  }
+    /* Table Header */
+    table th {
+        @apply text-left py-2 px-4 border-b border-gray-700 bg-gray-200 dark:bg-gray-900;
+    }
 
-  /* Table Body */
-  table td {
-    @apply py-2 px-4 border-b border-gray-700 ;
-  }
+    /* Table Body */
+    table td {
+        @apply py-2 px-4 border-b border-gray-700 dark:border-gray-900;
+    }
 
-  /* Hover Effect */
-  table tbody tr:hover {
-    @apply bg-gray-100;
-  }
+    /* Hover Effect */
+    table tbody tr:hover {
+        @apply bg-gray-100 dark:bg-gray-900;
+    }
 
-  /* Striped Rows */
-  
+    /* Striped Rows */
 }
-
