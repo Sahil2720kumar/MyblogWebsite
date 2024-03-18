@@ -1,7 +1,7 @@
 import { getAllPostsSlug, getAllChaptersSlug } from "@/services/cmsServices";
 
 
-export const revalidate = 120; // revalidate the data at most every 2 min
+export const revalidate = 0; // revalidate the data at most every 2 min
 
 
 export default async function sitemap() {

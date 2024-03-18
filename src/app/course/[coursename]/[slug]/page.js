@@ -83,7 +83,7 @@ export default async function CourseChapter({ params, searchParams }) {
                         alt='Picture of the chapter'
                     />
                 </div>
-                <div className=''>
+                <div className='overflow-scroll'>
                     {/* accordion-collapse  */}
                     <Accordion chapters={chapters} />
                     {/* End accordion-collapse  */}
