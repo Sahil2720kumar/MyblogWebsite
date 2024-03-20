@@ -24,13 +24,16 @@ export const metadata = {
     metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL),
     keywords: [
         "Daily learning",
-        "Learning resources",
-        "Educational content",
-        "Online learning",
+        "BCOM",
+        "UGC NET",
+        "MCOM",
+        "Commerce Stream",
+        "Dibrugarh University Courses",
+        "Gauhati University Courses",
+        "M.Com",
+        "IGNOU Course",
+        "NIOS Courses",
         "Knowledge hub",
-        "Study materials",
-        "Learning platform",
-        "Educational articles",
         "Daily lessons",
         "DailyLearn",
         "daily learn"
@@ -71,7 +74,7 @@ export default function RootLayout({ children }) {
                             <Navbar />
                             <main className=''>
                                 {children}
-                               <Footer/>
+                                <Footer />
                             </main>
                             <Script
                                 type='application/ld+json'
