@@ -23,6 +23,8 @@ export const metadata = {
     siteName: "DailyLearn",
     metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL),
     keywords: [
+        "DailyLearn",
+        "daily learn",
         "Daily learning",
         "BCOM",
         "UGC NET",
@@ -34,9 +36,7 @@ export const metadata = {
         "IGNOU Course",
         "NIOS Courses",
         "Knowledge hub",
-        "Daily lessons",
-        "DailyLearn",
-        "daily learn"
+        "Daily lessons"
     ],
     authors: [{ name: "sahil", url: process.env.NEXT_PUBLIC_BASE_URL }],
     openGraph: {
