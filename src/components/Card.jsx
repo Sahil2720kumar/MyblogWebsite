@@ -8,7 +8,7 @@ export default function Card({ cardContent, buttonContent, blog }) {
     return (
         <div
             id=''
-            className='bg-white flex-auto max-w-[355px] dark:bg-gray-700 card min-h-[410px] max-h-[500px] pb-1 shadow shadow-md overflow-hidden rounded rounded-xl'
+            className='bg-white flex-auto max-w-[355px] dark:bg-gray-700 card min-h-[420px] max-h-[500px] pb-1 shadow shadow-md overflow-hidden rounded rounded-xl'
         >
             <div className='h-[170px] p-0 w-full flex items-center justify-center'>
                 <Image
@@ -49,10 +49,10 @@ export default function Card({ cardContent, buttonContent, blog }) {
                 )}
 
                 <h2 className='text-xl my-2'>{cardContent?.title}</h2>
-                <p className='min-h-[120px] overflow-hidden text-ellipsis mt-3 mb-2 text-[16px] md:text-[19px] dark:text-white text-gray-700'>
+                <p className='overflow-hidden text-ellipsis mt-3 mb-2 text-[16px] md:text-[19px] dark:text-white text-gray-700'>
                     {blog ? cardContent.excerpt : cardContent.describtion}
                 </p>
-                <button className='text-[17px] font-semibold bg-indigo-600 transition hover:bg-indigo-700  text-white px-3 py-1 rounded rounded-full'>
+                <button className='text-[17px] font-semibold bg-indigo-600 transition hover:bg-indigo-700  text-white px-3 py-1 rounded rounded-full mb-1.5'>
                     {" "}
                     <Link
                         href={
