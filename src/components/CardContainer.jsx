@@ -1,7 +1,6 @@
 "use client";
-import react, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "@/components/Card";
-import axios from "axios";
 import PuffLoader from "react-spinners/PuffLoader";
 import { getPosts } from "@/services/cmsServices";
 
@@ -11,75 +10,86 @@ export default function CardContainer({ blog }) {
     const [skip, setSkip] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const [extraLoading, setExtraLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     const handleInfiniteScroll = () => {
-        const cards_containerHeight =
-            document.getElementById("cards_container");
-        if (
-            window?.innerHeight + document?.documentElement?.scrollTop + 1 >=
-            cards_containerHeight?.offsetHeight
-        ) {
+        const cardsContainer = document.getElementById("cards_container");
+        if (!cardsContainer) return;
+        
+        const scrollPosition = window.innerHeight + document.documentElement.scrollTop;
+        const containerBottom = cardsContainer.offsetHeight;
+        
+        if (scrollPosition + 1 >= containerBottom) {
             setSkip(prev => prev + 2);
             setExtraLoading(true);
         }
     };
+
     const getBlogs = async () => {
         try {
             const res = await getPosts(2, skip);
-            const data=res.postsConnection.edges;
-            setTotalPosts(res.postsConnection.aggregate.count)
-            setIsLoading(false);
-            setExtraLoading(false);
+            const data = res.postsConnection.edges;
+            setTotalPosts(res.postsConnection.aggregate.count);
             setPosts(prev => [...prev, ...data]);
         } catch (error) {
-            console.log("posts error", error);
+            setError(error.message);
+            console.error("Failed to fetch posts:", error);
+        } finally {
+            setIsLoading(false);
+            setExtraLoading(false);
         }
     };
-    useEffect(() => {
-        if (totalPosts <= skip) {
-            //console.log(totalPosts, skip);
-            return;
-        }
-         getBlogs();
-    }, [skip]);
 
     useEffect(() => {
-        console.log("useEffect called..");
-        window.addEventListener("scroll", handleInfiniteScroll);
-        return () => window.removeEventListener("scroll", handleInfiniteScroll);
-    }, []);
+        if (totalPosts <= skip) return;
+        getBlogs();
+    }, [skip, totalPosts]);
+
+    useEffect(() => {
+        const scrollHandler = () => {
+            if (!extraLoading) handleInfiniteScroll();
+        };
+        window.addEventListener("scroll", scrollHandler);
+        return () => window.removeEventListener("scroll", scrollHandler);
+    }, [extraLoading]);
+
+    if (error) {
+        return (
+            <div className="min-h-[200px] flex items-center justify-center text-red-600">
+                <p>Error loading posts: {error}</p>
+            </div>
+        );
+    }
 
     return (
-        <div className="min-h-screen md:flex md:items-center md:flex-col ">
+        <div className="min-h-screen flex flex-col items-center">
             <div
                 id="cards_container"
-                className=" my-4 flex items-center justify-center md:flex-row  md:flex-wrap flex-col space-y-5 p-3 px-6 space-y-2 md:space-y-0 md:gap-8"
+                className="w-full max-w-7xl my-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-6"
             >
                 {isLoading ? (
-                    <div className="h-[280px] flex items-center justify-center">
+                    <div className="col-span-full h-[280px] flex items-center justify-center">
                         <PuffLoader color="#3f6ff5" />
                     </div>
+                ) : posts.length === 0 ? (
+                    <div className="col-span-full h-[200px] flex items-center justify-center text-gray-500">
+                        No posts available
+                    </div>
                 ) : (
-                    posts.map((currentVal, index) => {
-                        return (
-                            <Card
-                                key={index}
-                                cardContent={currentVal.node}
-                                buttonContent={
-                                    blog ? "Read More" : "Start Course"
-                                }
-                                blog={blog}
-                            />
-                        );
-                    })
+                    posts.map((currentVal, index) => (
+                        <Card
+                            key={`${currentVal.node.id || index}`}
+                            cardContent={currentVal.node}
+                            buttonContent={blog ? "Read More" : "Start Course"}
+                            blog={blog}
+                        />
+                    ))
                 )}
             </div>
-            {extraLoading ? (
-                <div className="my-4 md:block h-[280px] flex md:flex-col items-center justify-center">
-                    <PuffLoader color="#3f6ff5" />
+            {extraLoading && (
+                <div className="py-4 flex items-center justify-center">
+                    <PuffLoader color="#3f6ff5" size={40} />
                 </div>
-            ) : (
-                ""
             )}
         </div>
     );

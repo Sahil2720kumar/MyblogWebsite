@@ -2,35 +2,42 @@
 import Link from "next/link";
 
 export default function Footer() {
+    const currentYear = new Date().getFullYear();
+    
     return (
-        <footer className='bg-gray-50 dark:bg-gray-800'>
-            <div className=' mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8'>
-                <div className='md:flex md:justify-around '>
-                    <div className='mb-6 md:mb-0'>
-                        <Link href='#' className='flex items-center'>
-                            <span className='self-center text-3xl font-semibold whitespace-nowrap dark:text-white text-indigo-600'>
-                                {" "}
-                                <h2>DailyLearn</h2>
+        <footer className='bg-gray-50 dark:bg-gray-900'>
+            <div className='container mx-auto w-full max-w-screen-xl px-4 py-8 lg:py-12'>
+                <div className='flex flex-col md:flex-row md:justify-between gap-8'>
+                    {/* Logo Section */}
+                    <div className='flex-shrink-0'>
+                        <Link href='/' className='inline-flex items-center'>
+                            <span className='text-3xl font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors'>
+                                DailyLearn
                             </span>
                         </Link>
                     </div>
-                    <div className='grid space-y-1.5 grid-cols-2  sm:gap-6 sm:grid-cols-3'>
+
+                    {/* Links Grid */}
+                    <div className='grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-12'>
                         <div>
-                            <p className='mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white'>
+                            <h3 className='mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-gray-100'>
                                 Resources
-                            </p>
-                            <ul className='text-gray-500 dark:text-gray-400 font-medium'>
-                                <li className='mb-4'>
+                            </h3>
+                            <ul className='space-y-4'>
+                                <li>
                                     <Link
                                         href='/course/marketing'
-                                        className='hover:underline'
+                                        className='text-gray-600 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 transition-colors'
                                     >
                                         Marketing
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href='#' className='hover:underline'>
-                                        Tailwind CSS
+                                    <Link
+                                        href='/course/development'
+                                        className='text-gray-600 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 transition-colors'
+                                    >
+                                        Development
                                     </Link>
                                 </li>
                             </ul>
@@ -77,22 +84,20 @@ export default function Footer() {
                         </div>
                     </div>
                 </div>
-                <hr className='my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8' />
-                <div className='sm:flex sm:items-center sm:justify-between md:justify-around'>
-                    <span className='text-sm text-gray-500 sm:text-center dark:text-gray-400'>
-                        © 2023{" "}
-                        <Link
-                            href='https://flowbite.com/'
-                            className='hover:underline'
-                        >
-                            Flowbite™
-                        </Link>
-                        . All Rights Reserved.
+
+                <hr className='my-8 border-gray-200 dark:border-gray-700' />
+
+                {/* Footer Bottom */}
+                <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4'>
+                    <span className='text-sm text-gray-500 dark:text-gray-400'>
+                        © {currentYear} DailyLearn. All Rights Reserved.
                     </span>
-                    <div className='flex mt-4 space-x-5 sm:justify-center sm:mt-0'>
+                    
+                    {/* Social Icons */}
+                    <div className='flex space-x-4'>
                         <Link
                             href='#'
-                            className='text-gray-500 hover:text-gray-900 dark:hover:text-white'
+                            className='text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors'
                         >
                             <svg
                                 className='w-4 h-4'
@@ -111,7 +116,7 @@ export default function Footer() {
                         </Link>
                         <Link
                             href='#'
-                            className='text-gray-500 hover:text-gray-900 dark:hover:text-white'
+                            className='text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors'
                         >
                             <svg
                                 className='w-4 h-4'
@@ -126,7 +131,7 @@ export default function Footer() {
                         </Link>
                         <Link
                             href='#'
-                            className='text-gray-500 hover:text-gray-900 dark:hover:text-white'
+                            className='text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors'
                         >
                             <svg
                                 className='w-4 h-4'
@@ -145,7 +150,7 @@ export default function Footer() {
                         </Link>
                         <Link
                             href='#'
-                            className='text-gray-500 hover:text-gray-900 dark:hover:text-white'
+                            className='text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors'
                         >
                             <svg
                                 className='w-4 h-4'
@@ -164,7 +169,7 @@ export default function Footer() {
                         </Link>
                         <Link
                             href='#'
-                            className='text-gray-500 hover:text-gray-900 dark:hover:text-white'
+                            className='text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors'
                         >
                             <svg
                                 className='w-4 h-4'

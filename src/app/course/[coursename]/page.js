@@ -10,15 +10,15 @@ import Image from "next/image";
 export async function generateMetadata({ params }) {
     const { coursename } = params;
     const data = await GetParticularCourseChapters(coursename);
-    console.log(data);
+    
     return {
         title: data.title,
-        description: `${data.describtion}`,
+        description: data.description,
 
         openGraph: {
             images: [{ url: data.banner.url }],
             title: data.title,
-            description: `${data.describtion}`,
+            description: data.description,
             siteName: "DailyLearn",
             locale: "en_US",
             type: "website"
@@ -26,41 +26,59 @@ export async function generateMetadata({ params }) {
     };
 }
 
-export default async function CourseName({ params, searchParams }) {
+export default async function CourseName({ params }) {
     const { coursename } = params;
     const data = await GetParticularCourseChapters(coursename);
-    console.log("describtion", data.describtion);
     const chapters = data.chapters;
-    // console.log(chapters);
+
     return (
-        <div className='min-h-screen  dark:text-white dark:bg-gray-800 max-w-screen-lg mx-auto'>
-            <div className='p-3 '>
-                <div className='flex items-center justify-center overflow-hidden  max-h-[200px] md:max-h-[400px]'>
+        <main className='min-h-screen dark:text-white dark:bg-gray-800'>
+            <div className='max-w-4xl mx-auto p-4 space-y-8'>
+                {/* Banner Image */}
+                <div className='relative aspect-video w-full overflow-hidden rounded-lg shadow-lg'>
                     <Image
                         src={data.banner.url}
-                        width={0}
-                        height={0}
-                        sizes='100vw'
-                        className='inline px-0.5 w-full overflow-hidden  h-full object-contain'
-                        alt={`${coursename} image`}
+                        fill
+                        priority
+                        className='object-cover'
+                        alt={`${data.title} course banner`}
                     />
                 </div>
-                <div className=' '>
-                    <h1 className='dark:text-white mt-5 md:text-5xl font-semibold  text-indigo-600 text-2xl'>
-                        {coursename} Chapters List
+
+                {/* Course Content */}
+                <div className='space-y-6'>
+                    <h1 className='text-3xl md:text-5xl font-bold text-indigo-600 dark:text-indigo-400'>
+                        {data.title}
                     </h1>
-                    <div>
-                        <ul className=' pl-2 pt-2 space-y-2'>
+                    
+                    {data.description && (
+                        <p className='text-gray-600 dark:text-gray-300 text-lg'>
+                            {data.description}
+                        </p>
+                    )}
+
+                    <div className='space-y-4'>
+                        <h2 className='text-2xl font-semibold'>Course Chapters</h2>
+                        <ul className='grid gap-4'>
                             {chapters.map((chapter, index) => (
                                 <li
-                                    key={index}
-                                    className='p-2 rounded shadow-sm shadow-gray-300 dark:shadow-gray-700'
+                                    key={chapter.slug}
+                                    className='group transition-all duration-200'
                                 >
                                     <Link
                                         href={`${coursename}/${chapter.slug}/`}
+                                        className='block p-4 rounded-lg bg-white dark:bg-gray-700 
+                                                 shadow-sm hover:shadow-md dark:shadow-gray-900 
+                                                 transform hover:-translate-y-1 transition-all duration-200'
                                     >
-                                        {" "}
-                                        <h2 className="md:text-2xl" >{chapter.title}</h2>
+                                        <div className='flex items-center space-x-3'>
+                                            <span className='text-indigo-500 font-medium'>
+                                                {String(index + 1).padStart(2, '0')}
+                                            </span>
+                                            <h3 className='text-xl font-medium group-hover:text-indigo-500'>
+                                                {chapter.title}
+                                            </h3>
+                                        </div>
                                     </Link>
                                 </li>
                             ))}
@@ -68,6 +86,6 @@ export default async function CourseName({ params, searchParams }) {
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
     );
 }

@@ -101,7 +101,7 @@ export const GET_PARTICULAR_POST = gql`
 
 export const GET_ALL_COURSES = gql`
     query GetAllCourses {
-        courseLists {
+        courseLists(first: 1000) {
             title
             slug
             totalChapters

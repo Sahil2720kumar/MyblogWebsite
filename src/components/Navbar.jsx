@@ -73,7 +73,7 @@ export default function Navbar() {
                     <div
                         className={`${
                             profileShow ? "block" : "hidden"
-                        } items-center  justify-between absolute right-10 md:right-1/3 lg:right-[60%]  top-1/2 z-50 text-base list-none bg-stone-50 divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`}
+                        } absolute right-4 md:right-8 top-16 z-50 min-w-[200px] bg-white dark:bg-gray-700 rounded-lg shadow-lg`}
                     >
                         <div className='px-4 py-3  '>
                             <span className='block text-sm text-gray-900 dark:text-white'>
@@ -116,7 +116,7 @@ export default function Navbar() {
 
                     {/* Desktop menu */}
                     <div className='hidden lg:block'>
-                        <ul className='flex flex-col items-center text-[18px] font-medium p-4 md:p-0 mt-1 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-900 md:dark:bg-gray-900 dark:border-gray-700'>
+                        <ul className='flex items-center space-x-6'>
                             <li>
                                 <Link
                                     href='/'
@@ -163,25 +163,27 @@ export default function Navbar() {
                                     Work With Us
                                 </Link>
                             </li>
-                            <hr />
-                            <li>
-                                <Link
-                                    href='/signin/'
-                                    onClick={() => setMobileMenu(!mobileMenu)}
-                                    className=' bg-indigo-500  text-white p-2 text-gray-900 rounded  md:hover:bg-indigo-600 hover:text-white dark:text-white md:dark:hover:text-white dark:hover:text-white dark:border-gray-700 transition-colors duration-300 transform  rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-50'
-                                >
-                                    Sign in
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    href='/signup/'
-                                    onClick={() => setMobileMenu(!mobileMenu)}
-                                    className=' bg-indigo-500  text-white p-2 text-gray-900 rounded  md:hover:bg-indigo-600 md:hover:text-white hover:outline dark:text-white hover:text-white dark:hover:text-white dark:border-gray-700 transition-colors duration-300 transform  rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-50'
-                                >
-                                    Sign up
-                                </Link>
-                            </li>
+                            {/* Auth buttons */}
+                            {!session ? (
+                                <>
+                                    <li>
+                                        <Link
+                                            href='/signin/'
+                                            className='px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors'
+                                        >
+                                            Sign in
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            href='/signup/'
+                                            className='px-4 py-2 text-indigo-600 border border-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors'
+                                        >
+                                            Sign up
+                                        </Link>
+                                    </li>
+                                </>
+                            ) : null}
                         </ul>
                     </div>
                     {/* End Desktop Menu*/}
@@ -332,25 +334,24 @@ export default function Navbar() {
                             />
                         </svg>
                     </div>
-                    <div className='w-auto flex items-center justify-between'>
-                        <div className={`${searchButton ? "block" : "hidden"}`}>
+                    <div className='w-auto flex items-center gap-3'>
+                        <div className={`${
+                            searchButton 
+                            ? "w-64 opacity-100" 
+                            : "w-0 opacity-0"
+                        } transition-all duration-300 ease-in-out overflow-hidden`}>
                             <form method='get' onSubmit={searchHandle}>
                                 <input
-                                    onChange={e =>
-                                        setSearchValue(e.target.value)
-                                    }
-                                    className='dark:text-gray-800 border border-indigo-700 outline-indigo-700 p-0.5 px-2 rounded rounded-xl'
-                                    placeholder='search here...'
+                                    onChange={e => setSearchValue(e.target.value)}
+                                    className='w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none'
+                                    placeholder='Search...'
                                     type='text'
                                 />
                             </form>
                         </div>
-                        <div
-                            onClick={() => {
-                                searchButton
-                                    ? setSearchButton(false)
-                                    : setSearchButton(true);
-                            }}
+                        <button
+                            onClick={() => setSearchButton(!searchButton)}
+                            className='p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors'
                         >
                             <svg
                                 xmlns='http://www.w3.org/2000/svg'
@@ -358,7 +359,7 @@ export default function Navbar() {
                                 viewBox='0 0 24 24'
                                 strokeWidth='1.5'
                                 stroke='currentColor'
-                                className='w-6 h-6 text-indigo-600 dark:text-white'
+                                className='w-6 h-6 text-gray-600 dark:text-gray-300'
                             >
                                 <path
                                     strokeLinecap='round'
@@ -366,7 +367,7 @@ export default function Navbar() {
                                     d='M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z'
                                 />
                             </svg>
-                        </div>
+                        </button>
                     </div>
                 </div>
             </nav>

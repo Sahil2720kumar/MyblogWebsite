@@ -1,27 +1,40 @@
 "use client"
-import react,{useContext,useState,useEffect} from "react"
-import {ThemeContext} from "@/context/ThemeContext"
- 
+import React, { useContext, useEffect } from "react"
+import { ThemeContext } from "@/context/ThemeContext"
 
 export default function ToggleThemeButton() {
-  const {theme,setTheme}=useContext(ThemeContext)
-  // console.log(localStorage.getItem("theme"))
-  const toggleTheme=()=>{
-    const htmlClasses=document?.querySelector("html").classList
-    if(localStorage.theme==="dark"){
-      localStorage.setItem("theme","light")
-      htmlClasses.remove("dark")
-      setTheme("light")
-    }else{
-      localStorage.setItem("theme","dark")
-      htmlClasses.add("dark")
-      setTheme("dark")
-    }
+  const { theme, setTheme } = useContext(ThemeContext)
+
+  const toggleTheme = () => {
+    if (typeof window === "undefined") return
+
+    const htmlClasses = document.documentElement.classList
+    const newTheme = theme === "dark" ? "light" : "dark"
+    
+    localStorage.setItem("theme", newTheme)
+    htmlClasses.toggle("dark")
+    setTheme(newTheme)
   }
   
   return (
-    <div onClick={toggleTheme} className={`border border-white w-12 h-6 rounded rounded-full  relative p-1 flex items-center ${theme=="dark"?"bg-white":"bg-indigo-600"}`}>
-      <div className={`absolute w-5 h-5  rounded rounded-full text-black ${theme=="dark"?"bg-indigo-600 right-0.5" :"bg-white left-0.5 "}`}></div>
-    </div>
+    <button
+      onClick={toggleTheme}
+      aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+      className={`
+        relative flex h-7 w-14 cursor-pointer items-center rounded-full
+        border-2 border-transparent transition-colors duration-200 ease-in-out
+        focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2
+        ${theme === "dark" ? "bg-indigo-600" : "bg-gray-200"}
+      `}
+    >
+      <span className="sr-only">Toggle theme</span>
+      <div
+        className={`
+          ${theme === "dark" ? "translate-x-7" : "translate-x-0"}
+          pointer-events-none inline-block h-6 w-6 transform rounded-full
+          bg-white shadow-lg ring-0 transition duration-200 ease-in-out
+        `}
+      />
+    </button>
   )
 }

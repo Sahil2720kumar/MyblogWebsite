@@ -38,7 +38,7 @@ export async function generateMetadata({ params }) {
     };
 }
 
-export const revalidate = 120; // revalidate the data at most every 10 min
+// export const revalidate = 120; // revalidate the data at most every 10 min
 
 export async function generateStaticParams() {
     const allSlugsQueryData = await getAllChaptersSlug();
@@ -71,25 +71,28 @@ export default async function CourseChapter({ params, searchParams }) {
 
     //console.log("chapterdata",chapterdata)
     return (
-        <div className='dark:text-white dark:bg-gray-800 max-w-screen-lg mx-auto'>
-            <div className='p-3 '>
-                <div className='flex items-center justify-center overflow-hidden max-h-[200px] md:max-h-[400px]'>
+        <div className='min-h-screen dark:text-white dark:bg-gray-800'>
+            <div className='max-w-screen-lg mx-auto px-4 py-6'>
+                <div className='mb-8'>
+                    <h1 className='text-3xl font-bold mb-4'>{chapterdata.title}</h1>
+                    <p className='text-gray-600 dark:text-gray-300 mb-6'>{chapterdata.excerpt}</p>
+                </div>
+                
+                <div className='rounded-lg overflow-hidden shadow-lg mb-8'>
                     <Image
                         src={chapterdata.image.url}
                         width={0}
                         height={0}
                         sizes='100vw'
-                        className='inline px-0.5 w-full overflow-hidden  h-full object-contain'
-                        alt='Picture of the chapter'
+                        className='w-full h-[300px] md:h-[400px] object-cover'
+                        alt={`Cover image for ${chapterdata.title}`}
+                        priority
                     />
                 </div>
-                <div className='overflow-scroll'>
-                    {/* accordion-collapse  */}
+
+                <div className='space-y-8'>
                     <Accordion chapters={chapters} />
-                    {/* End accordion-collapse  */}
-                    {/* tabs  */}
                     <CourseTabs topicContent={chapterdata} topicTitle={slug} />
-                    {/* End  tabs  */}
                 </div>
             </div>
         </div>
