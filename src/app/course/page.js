@@ -9,7 +9,7 @@ export const metadata = {
     description:"Embark on a journey of knowledge with DailyLearn's curated list of courses. Explore diverse subjects, expertly crafted content, and enrich your learning experience. Unlock new skills and possibilities on our comprehensive course page."
 };
 
-// export const revalidate = 120; // revalidate the data at most every 2 min
+export const revalidate = 60; // revalidate the data at most every 1 min
 
 export default async function Course() {
     const blog = false;

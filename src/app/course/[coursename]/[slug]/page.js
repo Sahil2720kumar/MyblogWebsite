@@ -38,7 +38,7 @@ export async function generateMetadata({ params }) {
     };
 }
 
-// export const revalidate = 120; // revalidate the data at most every 10 min
+export const revalidate = 60; // revalidate the data at most every 1 min
 
 export async function generateStaticParams() {
     const allSlugsQueryData = await getAllChaptersSlug();

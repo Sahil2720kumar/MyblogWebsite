@@ -26,6 +26,8 @@ export async function generateMetadata({ params }) {
     };
 }
 
+export const revalidate = 60; // revalidate the data at most every 1 min
+
 export default async function CourseName({ params }) {
     const { coursename } = params;
     const data = await GetParticularCourseChapters(coursename);
